@@ -12,7 +12,8 @@ def main():
         print("请设置 ANTHROPIC_API_KEY 环境变量")
         return
 
-    client = Anthropic(api_key=api_key)
+    base_url = os.environ.get("ANTHROPIC_BASE_URL")
+    client = Anthropic(api_key=api_key, base_url=base_url) if base_url else Anthropic(api_key=api_key)
     conn = sqlite3.connect("kaoyan.db")
     conn.row_factory = sqlite3.Row
     create_tables(conn)
