@@ -17,6 +17,13 @@ def main():
     conn.row_factory = sqlite3.Row
     create_tables(conn)
 
+    # 检查是否需要导入种子数据
+    cursor = conn.execute("SELECT COUNT(*) FROM schools")
+    if cursor.fetchone()[0] == 0:
+        print("数据库为空，正在导入种子数据...")
+        from kaoyan_agent.seed_data import seed
+        seed(conn)
+
     print("=" * 50)
     print("  考研择校助手")
     print("  可以问我：'帮我推荐学校' 或 '浙大计算机怎么样'")
