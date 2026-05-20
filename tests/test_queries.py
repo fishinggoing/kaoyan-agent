@@ -8,6 +8,7 @@ from kaoyan_agent.db.queries import (
     query_scores,
     get_employment,
     compare_schools,
+    query_admitted_scores,
 )
 
 
@@ -79,6 +80,11 @@ def _seed(conn):
     )
 
     conn.execute(
+        "INSERT INTO admitted_scores (major_id, year, lowest_score, avg_score, highest_score) VALUES (?,?,?,?,?)",
+        (zju_cs, 2025, 370, 385, 400),
+    )
+
+    conn.execute(
         "INSERT INTO employment_quality (school_id, year, employment_rate, avg_salary, summary) VALUES (?,?,?,?,?)",
         (zju, 2024, 0.98, 250000, "浙江大学计算机就业集中在杭州互联网企业"),
     )
@@ -146,3 +152,15 @@ def test_compare_schools(db):
     assert results[1]["school_name"] == "南京大学"
     assert results[0]["tier"] == "985"
     assert "admission_line" in results[0].keys()
+
+
+def test_query_admitted_scores(db):
+    zju = db.execute("SELECT id FROM schools WHERE name='浙江大学'").fetchone()[0]
+    zju_cs = db.execute(
+        "SELECT id FROM majors WHERE school_id=? AND name='计算机科学与技术'", (zju,)
+    ).fetchone()[0]
+    results = query_admitted_scores(db, major_id=zju_cs)
+    assert len(results) > 0
+    assert results[0]["lowest_score"] == 370
+    assert results[0]["avg_score"] == 385
+    assert results[0]["highest_score"] == 400
