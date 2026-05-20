@@ -110,4 +110,18 @@ TOOLS = [
             "required": ["school_ids", "major_name"],
         },
     },
+    {
+        "name": "collect_school_info",
+        "description": "当数据库中找不到用户询问的学校时，调用此工具从研招网采集学校信息。采集到的数据会自动写入数据库，之后可以重新查询。仅在确认学校不存在时调用。",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "school_name": {
+                    "type": "string",
+                    "description": "要采集的学校全称，如'同济大学'、'复旦大学'",
+                },
+            },
+            "required": ["school_name"],
+        },
+    },
 ]

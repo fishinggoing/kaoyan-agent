@@ -61,7 +61,7 @@ def main():
             if result["stop_reason"] == "tool_use":
                 tool_content = []
                 for tc in result["tool_calls"]:
-                    tool_result = execute_tool(conn, tc["name"], tc["input"])
+                    tool_result = execute_tool(conn, tc["name"], tc["input"], client)
                     print(f"\n[查询: {tc['name']}]")
                     tool_content.append(
                         {

@@ -7,7 +7,7 @@ from kaoyan_agent.agent.prompts import SYSTEM_PROMPT
 from kaoyan_agent.db import queries
 
 
-def execute_tool(conn: sqlite3.Connection, tool_name: str, tool_input: dict) -> str:
+def execute_tool(conn: sqlite3.Connection, tool_name: str, tool_input: dict, client: Anthropic = None) -> str:
     func_map = {
         "search_schools": queries.search_schools,
         "get_majors": queries.get_majors,
@@ -17,11 +17,20 @@ def execute_tool(conn: sqlite3.Connection, tool_name: str, tool_input: dict) -> 
         "compare_schools": queries.compare_schools,
     }
     func = func_map.get(tool_name)
-    if func is None:
-        return json.dumps({"error": f"Unknown tool: {tool_name}"})
+    if func is not None:
+        result = func(conn, **tool_input)
+        return json.dumps(result, ensure_ascii=False, indent=2)
 
-    result = func(conn, **tool_input)
-    return json.dumps(result, ensure_ascii=False, indent=2)
+    # Try collector tools
+    if client is not None:
+        from kaoyan_agent.collector.tools import execute_collect_tool
+        result = execute_collect_tool(conn, client, tool_name, tool_input)
+        # Only return if it's not "unknown tool"
+        parsed = json.loads(result)
+        if "error" not in parsed or "Unknown collector tool" not in parsed["error"]:
+            return result
+
+    return json.dumps({"error": f"Unknown tool: {tool_name}"})
 
 
 def run_agent(
