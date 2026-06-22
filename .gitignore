@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.venv/
+
+# Environment
+.env
+.env.local
+
+# Node
+node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Database
+*.db
+*.sqlite3
+
+# ChromaDB
+chroma_data/
+
+# Temp files (scraping artifacts, logs)
+tmp_*
+*.log
+
+# pytest
+.pytest_cache/
+
+# Personal / Sensitive
+.claude/
+*resume*
+frontend/.env
+
+# Scraped data (non-code artifacts)
+crawler_data/
+
+# Unrelated experiment projects
+try-gmini/
+nn-from-scratch/
+everything-claude-code/
+
+# OS
+.DS_Store
+Thumbs.db

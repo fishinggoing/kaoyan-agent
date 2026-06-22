@@ -1,0 +1,42 @@
+=== 省属重点 samples (80) ===
+
+=== 普通 samples (50) ===
+
+=== 双一流 samples ===
+
+=== 211 samples (20) ===
+
+=== 985 samples ===
+
+=== Keyword patterns in ALL schools ===
+  "成人": 3 schools
+  "继续教育": 1 schools
+  "职业技术": 731 schools
+  "高等专科": 151 schools
+  "广播电视": 40 schools
+  "职工": 143 schools
+  "业余": 21 schools
+  "开放大学": 46 schools
+  "技师": 5 schools
+  "技工": 2 schools
+
+=== 职业技术 schools by level ===
+  ORDINARY             6
+  PROVINCIAL           725
+
+=== 高等专科 schools by level ===
+  ORDINARY             9
+  PROVINCIAL           142
+
+=== 广播电视 schools by level ===
+  ORDINARY             40
+
+=== Schools with C9/985 parent name but not C9/985 ===
+  浙江大学城市学院                                 | PROVINCIAL
+  浙江大学宁波理工学院                               | PROVINCIAL
+  南京大学金陵学院                                 | PROVINCIAL
+  西安交通大学城市学院                               | PROVINCIAL
+  中山大学南方学院                                 | PROVINCIAL
+  中山大学新华学院                                 | PROVINCIAL
+  四川大学锦城学院                                 | PROVINCIAL
+  四川大学锦江学院                                 | PROVINCIAL

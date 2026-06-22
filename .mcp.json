@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gradschool-deploy": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-B", "mcp-servers/deploy/server.py"],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}
